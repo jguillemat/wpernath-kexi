@@ -1,4 +1,4 @@
-package org.wanja.klister;
+package org.wanja.kexi;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -19,6 +19,8 @@ public abstract class AbstractBaseLister implements Runnable {
     KubernetesClient client;
 
     public void run() {
+        System.out.println("Using " + client.getMasterUrl() + " - " + client.getNamespace());
+        System.out.println("  " + client.getKubernetesVersion().getPlatform());
         runCommand();
     }
 

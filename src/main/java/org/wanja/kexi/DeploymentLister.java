@@ -1,4 +1,4 @@
-package org.wanja.klister;
+package org.wanja.kexi;
 
 
 import java.time.Instant;

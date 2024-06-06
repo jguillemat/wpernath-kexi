@@ -1,4 +1,4 @@
-package org.wanja.klister;
+package org.wanja.kexi;
 
 import io.quarkus.picocli.runtime.annotations.TopCommand;
 import picocli.CommandLine.Command;
@@ -14,7 +14,8 @@ import picocli.CommandLine.ParameterException;
         subcommands = {
             PodLister.class, 
             ServiceLister.class, 
-            DeploymentLister.class
+            DeploymentLister.class,
+            RouteLister.class
         }
 )
 public class APICommand extends AbstractBaseLister {

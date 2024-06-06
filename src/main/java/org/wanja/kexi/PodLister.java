@@ -1,9 +1,7 @@
-package org.wanja.klister;
+package org.wanja.kexi;
 
 
 import java.time.Instant;
-import java.util.Formatter;
-import java.util.List;
 
 import io.fabric8.kubernetes.api.model.ContainerStatus;
 import io.fabric8.kubernetes.api.model.Pod;
