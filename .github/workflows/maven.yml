@@ -20,6 +20,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Official SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v2.2
+      with:
+        projectBaseDir: src/main/java # optional, default is .
+              
     - uses: actions/checkout@v4
     - name: Set up JDK 21
       uses: actions/setup-java@v3
