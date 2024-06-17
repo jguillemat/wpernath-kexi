@@ -19,10 +19,7 @@ public class DeploymentLister extends AbstractBaseLister {
                 .withName(resourceName)
                 .get();
             if( svc != null ) {
-                svc.getMetadata().getManagedFields().clear();
-                svc.getMetadata().getOwnerReferences().clear();
-                svc.getMetadata().setResourceVersion(null);
-                svc.getMetadata().setUid(null);
+                cleanMeta(svc.getMetadata());
                 svc.setStatus(null);
                 System.out.println(Serialization.asYaml(
                     svc

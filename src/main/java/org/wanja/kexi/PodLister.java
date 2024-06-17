@@ -17,10 +17,7 @@ public class PodLister extends AbstractBaseLister {
         if( resourceName != null ) {
             Pod p = client.pods().inNamespace(namespace).withName(resourceName).get();
             if( p != null ) {
-                p.getMetadata().getManagedFields().clear();
-                p.getMetadata().getOwnerReferences().clear();
-                p.getMetadata().setResourceVersion(null);
-                p.getMetadata().setUid(null);
+                super.cleanMeta(p.getMetadata());
                 p.setStatus(null);
                 System.out.println(Serialization.asYaml(p));
             }

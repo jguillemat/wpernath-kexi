@@ -23,10 +23,7 @@ public class RouteLister extends AbstractBaseLister {
         if( resourceName != null ) {
             Route r = oClient.routes().inNamespace(namespace).withName(resourceName).get();
             if( r != null ) {
-                r.getMetadata().getManagedFields().clear();
-                r.getMetadata().getOwnerReferences().clear();
-                r.getMetadata().setResourceVersion(null);
-                r.getMetadata().setUid(null);
+                cleanMeta(r.getMetadata());
                 r.setStatus(null);
                 System.out.println(Serialization.asYaml(r));
             }

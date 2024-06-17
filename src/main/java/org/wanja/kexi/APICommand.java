@@ -15,16 +15,17 @@ import picocli.CommandLine.ParameterException;
             PodLister.class, 
             ServiceLister.class, 
             DeploymentLister.class,
-            RouteLister.class
+            RouteLister.class,
+            AppExporter.class
         }
 )
-public class APICommand extends AbstractBaseLister {
+public class APICommand implements Runnable {
 
     @Spec
     CommandSpec spec;
 
     @Override
-    public void runCommand() {
+    public void run() {
         throw new ParameterException(spec.commandLine(), "Please specify a command");
     }
 

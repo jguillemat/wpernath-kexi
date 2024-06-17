@@ -3,16 +3,18 @@ package org.wanja.kexi;
 import java.time.Duration;
 import java.time.Instant;
 
+import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import jakarta.inject.Inject;
 import picocli.CommandLine.Option;
+import picocli.CommandLine.ScopeType;
 
 public abstract class AbstractBaseLister implements Runnable {
 
-    @Option(names = {"--namespace", "-n"}, description="The namespace whose pods should be listed", defaultValue = "default")
+    @Option(names = {"--namespace", "-n"}, description="The namespace whose pods should be listed", defaultValue = "default", scope = ScopeType.INHERIT)
     String namespace;
 
-    @Option(names = {"--resource-name", "-r"}, description="The resource you would like to list")
+    @Option(names = {"--resource-name", "-r"}, description="The resource you would like to list", scope = ScopeType.INHERIT)
     String resourceName;
 
     @Inject
@@ -48,5 +50,13 @@ public abstract class AbstractBaseLister implements Runnable {
         
     }
 
+    protected void cleanMeta(ObjectMeta meta) {
+        meta.getManagedFields().clear();
+        meta.getOwnerReferences().clear();
+        meta.setResourceVersion(null);
+        meta.setUid(null);
+        meta.setCreationTimestamp(null);
+        meta.setGeneration(null);
+    }
     public abstract void runCommand();
 }
