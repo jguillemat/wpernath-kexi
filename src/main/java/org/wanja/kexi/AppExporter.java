@@ -1,6 +1,5 @@
 package org.wanja.kexi;
 
-import java.io.File;
 import java.io.PrintStream;
 import java.util.List;
 
@@ -88,7 +87,7 @@ public class AppExporter extends AbstractBaseLister {
                             }
                             if( e.getSecretRef() != null ) {
                                 Log.info("Exporting Secret " + e.getSecretRef().getName());
-
+                                
                                 Secret s = client.secrets().inNamespace(namespace).withName(e.getSecretRef().getName()).get();
                                 cleanMeta(s.getMetadata());
                                 output.println(Serialization.asYaml(s));
