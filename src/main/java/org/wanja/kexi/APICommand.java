@@ -8,7 +8,7 @@ import picocli.CommandLine.ParameterException;
 
 @TopCommand
 @Command(
-        name="kexi - k8s exporter", 
+        name="kexi", 
         description = "Exports k8s resources as yaml or displays a list of existing resources by namespace",        
         mixinStandardHelpOptions = true, 
         subcommands = {
@@ -16,7 +16,8 @@ import picocli.CommandLine.ParameterException;
             ServiceLister.class, 
             DeploymentLister.class,
             RouteLister.class,
-            AppExporter.class
+            AppExporter.class,
+            DeleteCommand.class
         }
 )
 public class APICommand implements Runnable {
