@@ -20,11 +20,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Official SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v2.2
-      with:
-        projectBaseDir: src/main/java # optional, default is .
-              
     - uses: actions/checkout@v4
     - name: Set up JDK 21
       uses: actions/setup-java@v3
@@ -39,7 +34,7 @@ jobs:
       uses: actions/upload-artifact@v4.3.3
       with:
         # Artifact name
-        name: kexi # optional, default is artifact
+        name: kexi.jar # optional, default is artifact
         
         # A file, directory or wildcard pattern that describes what to upload
-        path: target/quarkus-app/quarkus-run.jar
+        path: target/kexi-0.0.1-runner.jar
