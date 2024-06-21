@@ -7,14 +7,16 @@ import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.client.ConfigBuilder;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClientBuilder;
-import io.quarkus.logging.Log;
 import jakarta.inject.Inject;
+import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Option;
+import picocli.CommandLine.ParameterException;
 import picocli.CommandLine.ScopeType;
+import picocli.CommandLine.Spec;
 
-public abstract class AbstractBaseLister implements Runnable {
+public abstract class AbstractBaseCommand implements Runnable {
 
-    @Option(names = {"--namespace", "-n"}, description="The namespace whose pods should be listed", defaultValue = "default", scope = ScopeType.INHERIT)
+    @Option(names = {"--namespace", "-n"}, description="The namespace whose pods should be listed", scope = ScopeType.INHERIT)
     String namespace;
 
     @Option(names = {"--resource-name", "-r"}, description="The resource you would like to list", scope = ScopeType.INHERIT)
@@ -35,9 +37,20 @@ public abstract class AbstractBaseLister implements Runnable {
     @Inject
     KubernetesClient client;
 
+    @Spec
+    CommandSpec spec;
+
     public void run() {
         if( masterURL != null && (userName != null || password != null || token != null) ) {
-            Log.info("Creating new connection to target kubernetes cluster");
+            if( password == null && token == null ) throw new ParameterException(spec.commandLine(), "You have to provide either username and password or a token to connect to Kubernetes");
+            if( token != null && (userName != null || password != null) ) {
+                throw new ParameterException(
+                    spec.commandLine(),
+                    "If you're providing a valid token there is no need to provide username and/or password."
+                );
+            }
+            
+            System.out.println("Creating new connection to target kubernetes cluster");
             client = new KubernetesClientBuilder().withConfig(
                 new ConfigBuilder()
                     .withMasterUrl(masterURL)
@@ -47,7 +60,11 @@ public abstract class AbstractBaseLister implements Runnable {
                     .build()
             ).build();
         }
+
         System.out.println("Using " + client.getMasterUrl() + " - v" + client.getKubernetesVersion().getMajor() + "." + client.getKubernetesVersion().getMinor() + " - " + client.getKubernetesVersion().getPlatform());
+        if (namespace == null) {
+            namespace = client.getNamespace();
+        }
 
         runCommand();
     }

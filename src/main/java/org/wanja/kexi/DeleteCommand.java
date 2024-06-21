@@ -5,8 +5,12 @@ import io.fabric8.openshift.client.OpenShiftClient;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
-@Command(name = "delete", mixinStandardHelpOptions = true, description = "Deletes all of the projects / namespaces listed after the command.")
-public class DeleteCommand extends AbstractBaseLister {
+@Command(
+    name = "delete", 
+    mixinStandardHelpOptions = true, 
+    description = "Deletes all of the projects / namespaces listed after the command."
+)
+public class DeleteCommand extends AbstractBaseCommand {
 
     @Parameters
     String[] projectNames;
