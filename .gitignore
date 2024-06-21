@@ -1,5 +1,7 @@
 target
-.github
 .vscode
 .mvn
 .git
+build
+gradle
+.gradle
