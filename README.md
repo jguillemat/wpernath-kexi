@@ -20,17 +20,20 @@ You have several options to use kexi. First of all you have to build it using ma
 Best option if you want to just play a bit with kexi.
 
 ```bash
-$ mvn clean package -Dquarkus.package.jar.type=uber-jar
-$ java -jar ./target/kexi-0.0.1-runner.jar app -n <namespace> -s app=cat-server -o ./test.yaml
+$ ./gradlew build -Dquarkus.package.jar.type=uber-jar
 ```
+
+After the build is successful, you can find the kexi uber-jar in `build/kexi-0.0.2-runner.jar`. This file is executable without any further dependencies (besides the JDK).
+
 
 ### Building and using a GraalVM-ce compiled native executable
-Use this option if you want to use kexi in a much easier form.
+Use this option if you want to use kexi in a much easier form. Please make sure to install the [GraalVM-CE](https://www.graalvm.org/downloads/)
 
 ```bash
-$ mvn clean package -Dnative
-$ ./target/kexi-0.0.1-runner app -n <namespace> -s app=cat-server -o ./test.yaml
+$ ./gradlew build -Dquarkus.native.enabled=true -Dquarkus.package.jar.enabled=false
 ```
+
+You can find the executable for your environment under `build/kexi-0.0.2-runner`. This file can then be used as is. It contains everything you need.
 
 ## Using kexi
 Right now, kexi can do the following:
