@@ -9,8 +9,12 @@ import io.fabric8.kubernetes.client.utils.Serialization;
 import io.fabric8.openshift.api.model.Route;
 import io.fabric8.openshift.api.model.config.v1.Project;
 
-@Command(name = "routes", mixinStandardHelpOptions = true)
-public class RouteLister extends AbstractBaseLister {
+@Command(
+    name = "routes", 
+    mixinStandardHelpOptions = true,
+    description = "Lists all routes in the given namespace. Replacement for oc get routes"
+)
+public class RouteLister extends AbstractBaseCommand {
 
     @Override
     public void runCommand() {

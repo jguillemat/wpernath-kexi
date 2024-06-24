@@ -7,8 +7,12 @@ import io.fabric8.kubernetes.api.model.apps.Deployment;
 import io.fabric8.kubernetes.client.utils.Serialization;
 import picocli.CommandLine.Command;
 
-@Command(name = "deployments", mixinStandardHelpOptions = true)
-public class DeploymentLister extends AbstractBaseLister {
+@Command(
+    name = "deployments", 
+    mixinStandardHelpOptions = true,
+    description = "Lists all deployments in the given namespace. Replacement for kubectl get deployment"
+)
+public class DeploymentLister extends AbstractBaseCommand {
 
     @Override
     public void runCommand() {

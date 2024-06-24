@@ -8,8 +8,12 @@ import io.fabric8.kubernetes.api.model.ServiceList;
 import io.fabric8.kubernetes.client.utils.Serialization;
 import picocli.CommandLine.Command;
 
-@Command(name = "services", mixinStandardHelpOptions = true)
-public class ServiceLister extends AbstractBaseLister {
+@Command(
+    name = "services", 
+    mixinStandardHelpOptions = true,
+    description = "Lists all services in the given namespace. Replacement for kubectl get services."
+)
+public class ServiceLister extends AbstractBaseCommand {
 
     public void runCommand() {
         if( resourceName != null ) {

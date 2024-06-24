@@ -9,8 +9,12 @@ import io.fabric8.kubernetes.api.model.PodList;
 import io.fabric8.kubernetes.client.utils.Serialization;
 import picocli.CommandLine.Command;
 
-@Command(name = "pods", mixinStandardHelpOptions = true)
-public class PodLister extends AbstractBaseLister {
+@Command(
+    name = "pods", 
+    mixinStandardHelpOptions = true,
+    description = "Lists all pods. Replacement for kubectl get pods"
+)
+public class PodLister extends AbstractBaseCommand {
     
     public void runCommand() {
 

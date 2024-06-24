@@ -22,7 +22,7 @@ import picocli.CommandLine.Option;
     mixinStandardHelpOptions = true,
     description="Tries to export a whole app bundle based on the selector label=value"
 )
-public class AppExporter extends AbstractBaseLister {
+public class AppExporter extends AbstractBaseCommand {
 
     @Option(names = {"--output", "-o"}, description="Where to write the generated manifests to", converter = PrintStreamConverter.class)
     PrintStream output = System.out;
