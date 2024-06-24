@@ -23,7 +23,7 @@ public class PodLister extends AbstractBaseCommand {
             if( p != null ) {
                 super.cleanMeta(p.getMetadata());
                 p.setStatus(null);
-                System.out.println(Serialization.asYaml(p));
+                output.println(Serialization.asYaml(p));
             }
         }
         else {

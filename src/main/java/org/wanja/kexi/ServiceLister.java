@@ -22,14 +22,11 @@ public class ServiceLister extends AbstractBaseCommand {
                 .get();
         
             if( svc != null ) {
-                svc.getMetadata().getManagedFields().clear();
-                svc.getMetadata().getOwnerReferences().clear();
-                svc.getMetadata().setResourceVersion(null);
-                svc.getMetadata().setUid(null);
+                cleanMeta(svc.getMetadata());
                 svc.getSpec().setClusterIP(null);
                 svc.getSpec().setClusterIPs(null);
                 svc.setStatus(null);
-                System.out.println(Serialization.asYaml(
+                output.println(Serialization.asYaml(
                     svc
                 ));
             }

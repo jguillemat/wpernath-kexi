@@ -25,7 +25,7 @@ public class DeploymentLister extends AbstractBaseCommand {
             if( svc != null ) {
                 cleanMeta(svc.getMetadata());
                 svc.setStatus(null);
-                System.out.println(Serialization.asYaml(
+                output.println(Serialization.asYaml(
                     svc
                 ));
             }

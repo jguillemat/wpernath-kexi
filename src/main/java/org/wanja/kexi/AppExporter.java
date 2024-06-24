@@ -24,9 +24,6 @@ import picocli.CommandLine.Option;
 )
 public class AppExporter extends AbstractBaseCommand {
 
-    @Option(names = {"--output", "-o"}, description="Where to write the generated manifests to", converter = PrintStreamConverter.class)
-    PrintStream output = System.out;
-
     @Option(names = {"--selector", "-s"}, description="The label selector to use to scan for resources. It's in the form of label=value", defaultValue="app=my-app", required=true)
     String selector;
     String label;

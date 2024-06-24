@@ -1,5 +1,6 @@
 package org.wanja.kexi;
 
+import java.io.PrintStream;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -33,6 +34,9 @@ public abstract class AbstractBaseCommand implements Runnable {
 
     @Option(names = { "--server" }, description = "The master URL of the kubernetes cluster to use")
     String masterURL;
+
+    @Option(names = {"--output", "-o"}, description="Where to write the generated manifest(s) to", converter = PrintStreamConverter.class)
+    PrintStream output = System.out;
 
     @Inject
     KubernetesClient client;
@@ -101,5 +105,6 @@ public abstract class AbstractBaseCommand implements Runnable {
         meta.setCreationTimestamp(null);
         meta.setGeneration(null);
     }
+    
     public abstract void runCommand();
 }

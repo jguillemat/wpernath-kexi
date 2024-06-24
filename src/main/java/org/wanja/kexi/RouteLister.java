@@ -29,7 +29,7 @@ public class RouteLister extends AbstractBaseCommand {
             if( r != null ) {
                 cleanMeta(r.getMetadata());
                 r.setStatus(null);
-                System.out.println(Serialization.asYaml(r));
+                output.println(Serialization.asYaml(r));
             }
         }
         else {
