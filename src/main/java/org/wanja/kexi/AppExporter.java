@@ -1,6 +1,5 @@
 package org.wanja.kexi;
 
-import java.io.PrintStream;
 import java.util.List;
 
 import io.fabric8.kubernetes.api.model.ConfigMap;
